@@ -7,7 +7,7 @@
 <title>asto</title>
 </head>
 <body>
-	<a href="/board/form">글쓰기다</a>
+	<a href="/board/form">글쓰기</a>
 	
 </body>
 </html>
