@@ -1,5 +1,7 @@
 package org.nhnnext.web;
 
+import java.util.ArrayList;
+
 import org.nhnnext.repository.BoardRepository;
 import org.nhnnext.support.FileUploader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,16 @@ public class BoardController {
 		board.setAttachment(img_file.getOriginalFilename());
 		boardRepository.save(board);
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/list")
+	public String list(Model model) {
+		Iterable<Board> boardlist;
+		//= new ArrayList<Board>();
+		boardlist = boardRepository.findAll();
+		System.out.println("라라랄?:" + boardlist);
+		model.addAttribute("boardlist", boardlist);
+		return "list";
 	}
 	
 	@RequestMapping("/{id}/modify")

@@ -15,6 +15,7 @@
 			CONTENTS : ${board.contents}<br>
 			<button type="button" name="modify" onclick="location.href='/board/${board.id}/modify'">수정</button>
 			<button type="button" name="delete" onclick="location.href='/board/${board.id}/delete'">삭제</button>
+			<button type="button" name="list" onclick="location.href='/board/list'">목록</button>
 		</div>
 	</div>
 </body>

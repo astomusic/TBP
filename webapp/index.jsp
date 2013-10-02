@@ -9,7 +9,8 @@
 </head>
 <body>
 <div id="wrap">
-	<a href="/board/form">글쓰기</a>
+	<button type="button" name="new" onclick="location.href='/board/form'">새글쓰기</button>
+	<button type="button" name="list" onclick="location.href='/board/list'">목록</button>
 </div>
 </body>
 </html>
