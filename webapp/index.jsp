@@ -5,10 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-<title>asto</title>
+<title>TBP</title>
 </head>
 <body>
-	<a href="/board/form">글쓰기</a>
-	
+<div id="wrap">
+	<a href="/board/form">글쓰기요</a>
+</div>
 </body>
 </html>
