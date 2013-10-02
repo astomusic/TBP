@@ -15,8 +15,8 @@
 	<div id="request">
 	 	<form action="/board" method="POST" enctype="multipart/form-data">
 	 	<label for="title">제목 :</label> 
-	 	<input type="text" id="title" name="title" size="45" placeholder="제목을 입력하세요"><br>
-	 	<textarea id="contents" name="contents" rows="10" cols="40" placeholder="내용을 입력하세요"></textarea><br>
+	 	<input type="text" id="title" name="title" size="45" value="${board.title}"><br>
+	 	<textarea id="contents" name="contents" rows="10" cols="40">${board.contents}</textarea><br>
 	 	<input type="file" name="img_file" size ="20" accept="image/*">
 	 	<input type="submit" value="제출">
 	 	</form>

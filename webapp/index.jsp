@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="wrap">
-	<a href="/board/form">글쓰기요</a>
+	<a href="/board/form">글쓰기</a>
 </div>
 </body>
 </html>
