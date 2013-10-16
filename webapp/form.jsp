@@ -19,6 +19,7 @@
 	 	<textarea id="contents" name="contents" rows="10" cols="40" placeholder="내용을 입력하세요"></textarea><br>
 	 	<input type="file" name="img_file" size ="20" accept="image/*">
 	 	<input type="submit" value="제출">
+	 	<button type="button" name="cancel" onclick="location.href='/board/list'">취소</button>
 	 	</form>
 	</div>
 </div>

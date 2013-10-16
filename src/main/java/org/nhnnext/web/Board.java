@@ -1,9 +1,13 @@
 package org.nhnnext.web;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Board {
@@ -16,9 +20,20 @@ public class Board {
 	private String contents;
 	@Column(length=5000, nullable = false)
 	private String attachment;
+	
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) 
+	private List<Comment> comments;
+
+	public List<Comment> getComments() { 
+		return comments;
+	}
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public String getTitle() {

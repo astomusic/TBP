@@ -25,14 +25,16 @@ public class BoardController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(Board board, MultipartFile img_file) {
-		//System.out.println("Board: " + board);
+		//if(board.getId() )
+		//System.out.println("Board: " + board.getId());
 		//System.out.println("filename: " + img_file.getOriginalFilename());
 		// TODO FileUploader API를 활용해 업로드한 파일을 복사한다.
 		FileUploader.upload(img_file);
 		// TODO 첨부한 이미지 정보를 데이터베이스에 추가한다.
 		board.setAttachment(img_file.getOriginalFilename());
 		boardRepository.save(board);
-		return "redirect:/";
+		long id = board.getId();
+		return "redirect:/board/" + id;
 	}
 	
 	@RequestMapping("/list")
@@ -40,7 +42,7 @@ public class BoardController {
 		Iterable<Board> boardlist;
 		//= new ArrayList<Board>();
 		boardlist = boardRepository.findAll();
-		System.out.println("라라랄?:" + boardlist);
+		//System.out.println("라라랄?:" + boardlist);
 		model.addAttribute("boardlist", boardlist);
 		return "list";
 	}
@@ -49,13 +51,29 @@ public class BoardController {
 	public String modify(@PathVariable Long id, Model model) {
 		Board board = boardRepository.findOne(id);
 		model.addAttribute("board", board);
-		boardRepository.delete(id);
+		//board.setId(id);
+		//boardRepository.delete(id);
 		return "modify";
+	}
+
+	@RequestMapping("/{id}/modified")
+	public String modified(@PathVariable Long id, Board board, MultipartFile img_file) {
+		board.setId(id);
+		FileUploader.upload(img_file);
+		board.setAttachment(img_file.getOriginalFilename());
+		boardRepository.save(board);
+		return "redirect:/board/" + id;
 	}
 
 	@RequestMapping("/{id}/delete")
 	public String delete(@PathVariable Long id, Model model) {
-		boardRepository.delete(id);
+		Board board = boardRepository.findOne(id);
+		if(board.getComments().isEmpty() == true){
+			boardRepository.delete(id);
+		} else {
+			model.addAttribute("message", "댓글이 있는 글을 삭제할수 없습니다!"); 
+			return "redirect:/";
+		}
 		return "redirect:/";
 	}
 	
