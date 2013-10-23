@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,12 +14,12 @@
 </head>
 <body>
 	<div id="wrap">
-		<h1>TITLE : ${board.title}</h1>
-		<div>
+		<h1>${board.title}</h1>
+		<div id="show_content">
 			<c:if test="${not empty board.attachment}">
 			<img src="/images/${board.attachment}"><br>
 			</c:if>
-			CONTENTS : ${board.contents}<br>
+			${board.contents}<br><br>
 			<button type="button" name="modify" onclick="location.href='/board/${board.id}/modify'">수정</button>
 			<c:choose>
 			<c:when test="${not empty board.comments}">
@@ -32,22 +32,19 @@
 			<button type="button" name="list" onclick="location.href='/board/list'">목록</button>
 		</div>
 		
-		<div>
-		-----------------댓글목록-----------------
+		<div id="comment_view">
 		<ul>
 			<c:forEach items="${board.comments}" var="comment">
-				<li>${comment.content} <button type="button" name="c_delete" onclick="location.href='/board/${comment.id}/comment_delete'">삭제</button></li>
+				<li>${comment.content} <button type="button" name="c_delete" onclick="location.href='/board/${comment.id}/comment_delete'">x</button></li>
 				
 			</c:forEach>
 		</ul>
 		</div>
 		
-		<div>
+		<div id="comment">
 		<form action="/board/${board.id}/comment" method="POST" enctype="multipart/form-data">
-	 	<br><label for="comment_title">-----------------댓글입력-----------------</label><br>
-	 	<textarea id="content" name="content" rows="5" cols="40" placeholder="댓글을 입력하세요"></textarea><br>
-	 	<input type="submit" value="댓글달기"><br>
-	 	------------------------------------------
+	 	<textarea id="content" name="content" rows="2" cols="48" placeholder="댓글을 입력하세요"></textarea><br>
+	 	<input type="submit" value="댓글"><br>
 	 	</form>
 		</div>
 	</div>
