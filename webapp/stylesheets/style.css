@@ -76,7 +76,7 @@ html{
 h1 {
 	text-align : center;
 	margin-top : 20px;
-	font-size : 2em;
+	font-size : 1.5em;
 	font-weight : 100; /*default value : 4000 */
 	background-color: rgba(255, 255, 255, 0.5);
 	letter-spacing : 0.1em;
@@ -85,7 +85,7 @@ h1 {
 }
 
 img {
-	max-width : 380px;
+	max-width : 360px;
 }
 
 input[type=submit], button {
@@ -98,7 +98,7 @@ input[type=submit], button {
 	width : 50px;
 	height: 20px;
 	border-radius : 1em;
-	
+	vertical-align: top;
 }
 
 button[name=c_delete] {
@@ -121,6 +121,12 @@ textarea {
 	resize : none;
 }
 
+#content_content {
+	padding : 10px 0px;
+	background-color: rgba(255, 255, 255, 0.5);
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
 #board_list {
 	padding : 10px 20px;
 }
@@ -144,14 +150,24 @@ textarea {
 
 }
 
-#comment {
-	padding : 10px 20px;
+.list_content>h1, .list_content>#content_content, .list_content>.buttons, .list_content>.comment{
+	display: none;
 }
 
-#comment_view {
+.comment {
 	padding : 10px 20px;
+	1line-height: 150px;
 }
 
+.comment_view {
+	padding : 10px 20px;
+	display: block;
+	-webkit-transition: all 1s ease-out;
+    opacity: 0; 
+    height: 0;
+    overflow: hidden;
+}
+	
 #request {
 	margin : 20px 0px;
 	text-align : center;

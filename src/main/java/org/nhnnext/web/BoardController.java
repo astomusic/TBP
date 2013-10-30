@@ -1,6 +1,7 @@
 package org.nhnnext.web;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.nhnnext.repository.BoardRepository;
 import org.nhnnext.support.FileUploader;
@@ -39,11 +40,12 @@ public class BoardController {
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
-		Iterable<Board> boardlist;
+		//Iterable<Board> boardlist;
 		//= new ArrayList<Board>();
-		boardlist = boardRepository.findAll();
-		//System.out.println("라라랄?:" + boardlist);
-		model.addAttribute("boardlist", boardlist);
+		//boardlist = boardRepository.findAll();
+		List<Board> copy = (List<Board>) boardRepository.findAll();
+		Collections.reverse(copy);
+		model.addAttribute("boardlist", copy);
 		return "list";
 	}
 	
