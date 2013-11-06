@@ -12,6 +12,7 @@
 	<div id="index_butten">
 	<button type="button" name="new" onclick="location.href='/board/form'">새글</button>
 	<button type="button" name="list" onclick="location.href='/board/list'">목록</button>
+	<button type="button" name="signin" onclick="location.href='/login/form'">가입</button>
 	</div>
 </div>
 </body>

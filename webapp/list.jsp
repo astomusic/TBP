@@ -8,6 +8,10 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 <title>List</title>
 <script type="text/javascript"> 
+	
+	
+	
+	
 	function del() {
 		alert("댓글이 있는 글을 삭제할수 없습니다!");
 	}
@@ -17,7 +21,7 @@
 		countComments();
 		registerEvents();
 	}
-	
+
 	function countComments() {
 		//console.log('함수호출');
 		commentList = document.querySelectorAll('.comment_view>ul');
@@ -44,6 +48,35 @@
 		for (var i=0 ; i < boardimg.length ; i++) {
 			boardimg[i].addEventListener('click',toggleimg, false);
 		}
+		
+		formList = document.querySelectorAll('.comment input[type=submit]');
+		
+		for ( var i=0 ; i < formList.length ; i++) {
+			formList[i].addEventListener('click',writeComments, false);
+		}
+	}
+	
+	function writeComments(e) {
+		e.preventDefault();
+		console.log("clicked");
+		var eleForm = e.currentTarget.form;
+		var oFormData = new FormData(eleForm); //form data들을 자동으로 묶어준다.
+		var sID = eleForm[0].value;
+		var url = "/board/" +sID + "/comments.json";
+		var request = new XMLHttpRequest();
+		request.open("POST" , url, true);
+		request.onreadystatechange = function() {
+			if(request.readyState ==4 && request.status ==200) {
+				console.log("응답이 왔어요~");
+				var obj = JSON.parse(request.responseText);
+				var eleCommentList = eleForm.parentNode.previousElementSibling;
+				var eleCommentListul = eleCommentList.querySelectorAll('ul');
+				eleCommentListul[0].insertAdjacentHTML("beforeend" , "<li>"+ obj.content +"</li>" );
+				var eleCommentListli = eleCommentList.querySelectorAll('ul>li');
+				console.log(eleCommentListli);
+			}
+		}
+		request.send(oFormData);
 	}
 	
 	function toggleComments(e) {
@@ -52,7 +85,7 @@
 		comment = e.target.parentNode.parentNode.getElementsByClassName('comment_view');
 		li = comment[0].querySelectorAll("ul>li");
 		li_count = li.length;
-		console.log(li_count);
+		//console.log(li_count);
 		style = window.getComputedStyle(comment[0]);
 		display = style.getPropertyValue('display');
 		opacity = style.getPropertyValue('opacity');
@@ -64,7 +97,7 @@
 		} else if(opacity === "0") {
 			//comment[0].style.display = "none";
 			comment[0].style.opacity = "1";
-			comment[0].style.height = li_count*17 + "px";
+			comment[0].style.height = li_count*19 + "px";
 		}
 	}
 	
@@ -135,8 +168,9 @@
 					<div class="comment">
 						<form action="/board/${item.id}/comment" method="POST"
 							enctype="multipart/form-data">
-							<input type="text" id="content" name="content"
-								placeholder="댓글을 입력하세요"> <input type="submit" value="댓글"><br>
+							<input type="hidden" name="id" value="${item.id}"> <input
+								type="text" id="content" name="content" placeholder="댓글을 입력하세요">
+							<input type="submit" value="댓글"><br>
 						</form>
 					</div>
 				</div>
