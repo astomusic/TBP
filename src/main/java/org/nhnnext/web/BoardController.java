@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 	@Autowired
 	private BoardRepository boardRepository;
 
@@ -26,6 +30,7 @@ public class BoardController {
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(Board board, MultipartFile img_file) {
+		log.debug("New Post In Board : {}", board);
 		//if(board.getId() )
 		//System.out.println("Board: " + board.getId());
 		//System.out.println("filename: " + img_file.getOriginalFilename());

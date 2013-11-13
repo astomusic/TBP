@@ -15,11 +15,11 @@
 	<div id="request">
 	 	<form action="/login/new" method="POST" enctype="multipart/form-data">
 	 	<label for="name">NAME :</label> 
-	 	<input type="text" id="name" name="name" size="45" placeholder="name"><br>
+	 	<input type="text" id="form_name" name="form_name" size="45" placeholder="name"><br>
 	 	<label for="userid">USER ID :</label> 
-	 	<input type="text" id="userid" name="userid" size="45" placeholder="user id"><br>
+	 	<input type="text" id="form_userid" name="form_userid" size="45" placeholder="user id"><br>
 	 	<label for="password">PASSWORD :</label> 
-	 	<input type="text" id="password" name="password" size="45" placeholder="password"><br>
+	 	<input type="text" id="form_password" name="form_password" size="45" placeholder="password"><br>
 	 	<input type="submit" value="제출">
 	 	<button type="button" name="cancel" onclick="location.href='/'">취소</button>
 	 	</form>

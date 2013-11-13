@@ -167,14 +167,31 @@ textarea {
     height: 0;
     overflow: hidden;
 }
-	
+
 #request {
 	margin : 20px 0px;
 	text-align : center;
+}
+
+#login {
+	margin : 20px 20px;
+	text-align : left;
 }
 
 #wrap {
 	width : 400px;
 	border : 1px solid rgba(255, 255, 255, 0.5);
 	margin: 0 auto;
+}
+
+#userid, #password {
+    display: block;
+    width : 320px;
+    height: 25px;
+    padding-left: 38px;
+    margin-right : 20px;
+    background: url('http://i.imgur.com/s0O9hy0.png') 10px center no-repeat, -webkit-linear-gradient(45deg, #ffffff 0%, #ffffff 80%, #a1a1a1 80%, #858585);
+    color: #000000;
+    border: 1px solid black;
+    transition: box-shadow .3s;
 }

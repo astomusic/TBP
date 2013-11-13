@@ -9,101 +9,108 @@
 <title>List</title>
 <script type="text/javascript"> 
 	
-	
-	
-	
 	function del() {
 		alert("댓글이 있는 글을 삭제할수 없습니다!");
 	}
 	
 	function initPage() {
-		//console.log('로딩이 됐슈');
 		countComments();
 		registerEvents();
 	}
 
 	function countComments() {
-		//console.log('함수호출');
 		commentList = document.querySelectorAll('.comment_view>ul');
-		commentcount = document.querySelectorAll('.comment');
-		//console.log(commentList);
+		commentcount = document.querySelectorAll('.comment>p');
 		for(var i =0 ; i < commentList.length ; i++) {
 			var currentNode = commentList[i];
 			var nPListCount = currentNode.querySelectorAll('li').length;
-			commentcount[i].insertAdjacentHTML("afterbegin","<a href='javascript:void(0)'>댓글 : " + nPListCount) + "</a>";
-			//commentcount[i].insertAdjacentHTML("afterbegin","댓글 : " + nPListCount);
+			commentcount[i].innerHTML = "<a href='javascript:void(0)'>댓글 : " + nPListCount + "</a>";
 		}
 	}
 	
 	function registerEvents() {
-		commenttog = document.querySelectorAll('.comment>a');
-		//console.log(commenttog);
-		//contentList =
+		commenttog = document.querySelectorAll('.comment>p');
 		for (var i=0 ; i < commenttog.length ; i++) {
 			commenttog[i].addEventListener('click',toggleComments, false);
 		}
 		
 		boardimg = document.querySelectorAll('.list_content>img');
-		//console.log(boardimg);
 		for (var i=0 ; i < boardimg.length ; i++) {
 			boardimg[i].addEventListener('click',toggleimg, false);
 		}
 		
 		formList = document.querySelectorAll('.comment input[type=submit]');
-		
 		for ( var i=0 ; i < formList.length ; i++) {
 			formList[i].addEventListener('click',writeComments, false);
 		}
+		
+		commentList = document.querySelectorAll('.comment_view>ul>li>button');
+		for ( var i=0 ; i < commentList.length ; i++) {
+			commentList[i].addEventListener('click',deleteComments, false);
+		}
+	}
+	function deleteComments(e) {
+		var eleForm = e.toElement.parentElement.firstElementChild;
+		var sID = eleForm.id;
+		var url = "/board/" +sID + "/comment_delete.json";
+		var request = new XMLHttpRequest();
+		request.open("POST" , url, true);
+		request.onreadystatechange = function() {
+			if(request.readyState ==4 && request.status ==200) {
+				var deletedcomment = e.toElement.parentElement;
+				var comments = deletedcomment.parentElement.parentElement;
+				deletedcomment.outerHTML = "";
+				var commentsli = comments.querySelectorAll('ul>li');
+				comments.style.height = commentsli.length * 19 + "px";
+				countComments();
+			}
+		}
+		request.send(sID);
 	}
 	
 	function writeComments(e) {
 		e.preventDefault();
-		console.log("clicked");
 		var eleForm = e.currentTarget.form;
+		var textbox = eleForm.querySelectorAll('input[type=text]');
 		var oFormData = new FormData(eleForm); //form data들을 자동으로 묶어준다.
+		textbox[0].value = "";
 		var sID = eleForm[0].value;
 		var url = "/board/" +sID + "/comments.json";
 		var request = new XMLHttpRequest();
 		request.open("POST" , url, true);
 		request.onreadystatechange = function() {
 			if(request.readyState ==4 && request.status ==200) {
-				console.log("응답이 왔어요~");
 				var obj = JSON.parse(request.responseText);
 				var eleCommentList = eleForm.parentNode.previousElementSibling;
 				var eleCommentListul = eleCommentList.querySelectorAll('ul');
-				eleCommentListul[0].insertAdjacentHTML("beforeend" , "<li>"+ obj.content +"</li>" );
+				var str_del = "<button type=\"button\" name=\"c_delete\" onclick=\'javascript:void(0)\' id=\""+obj.id+"\">x</button>"
+				eleCommentListul[0].insertAdjacentHTML("beforeend" , "<li>"+obj.content+str_del+"</li>" );
 				var eleCommentListli = eleCommentList.querySelectorAll('ul>li');
-				console.log(eleCommentListli);
+				eleCommentList.style.height = eleCommentListli.length * 19 + "px";
+				eleCommentList.style.opacity = "1";
+				countComments();
+				registerEvents();
 			}
 		}
 		request.send(oFormData);
 	}
 	
 	function toggleComments(e) {
-		//console.log(e);
-		//commentList = document.getElementsByClassName('comment_view');
-		comment = e.target.parentNode.parentNode.getElementsByClassName('comment_view');
+		comment = e.target.parentNode.parentNode.parentNode.getElementsByClassName('comment_view');
 		li = comment[0].querySelectorAll("ul>li");
 		li_count = li.length;
-		//console.log(li_count);
-		style = window.getComputedStyle(comment[0]);
-		display = style.getPropertyValue('display');
-		opacity = style.getPropertyValue('opacity');
-		//console.log(display);
+		opacity = getStyle(comment[0], 'opacity');
+		
 		if(opacity === "1") {
-			//comment[0].style.display = "block";
 			comment[0].style.opacity = "0";
 			comment[0].style.height = "0px";
 		} else if(opacity === "0") {
-			//comment[0].style.display = "none";
 			comment[0].style.opacity = "1";
 			comment[0].style.height = li_count*19 + "px";
 		}
 	}
 	
 	function toggleimg(e) {
-		//.list_content>h1, .list_content>#content_content, .list_content>.buttons, .list_content>.comment
-		//console.log(e);
 		board = e.target.parentElement;
 		head = board.querySelectorAll('h1');
 		content_content = board.querySelectorAll('#content_content');
@@ -126,12 +133,31 @@
 			comment_view[0].style.height = "0px";
 		}
 	}
+	
+	function getStyle(element, propoerty) {
+		style = window.getComputedStyle(element);
+		result = style.getPropertyValue(propoerty);
+		return result;
+	}
 
 	window.onload = initPage;
 </script>
 </head>
 <body>
 	<div id="wrap">
+		<header>
+			<c:choose>
+				<c:when test="${empty sessionScope.userid}">
+					<a>로그인 해주세요</a>
+					<button type="button" name="login" onclick="location.href='/'">Log in</button>
+					<button type="button" name="signin" onclick="location.href='/login/form'">Sign in</button>
+				</c:when>
+				<c:otherwise>
+					<a>${sessionScope.name}님 환영합니다.</a>
+					<button type="button" name="signout" onclick="location.href='/logout'">Logout</button>
+				</c:otherwise>
+			</c:choose>
+		</header>
 		<h1>LIST</h1>
 		<div id="board_list">
 			<c:forEach items="${boardlist}" var="item">
@@ -159,17 +185,17 @@
 						<ul>
 							<c:forEach items="${item.comments}" var="comment">
 								<li>${comment.content}
-									<button type="button" name="c_delete"
-										onclick="location.href='/board/${comment.id}/comment_delete'">x</button>
+									<button type="button" name="c_delete" onclick='javascript:void(0)' id="${comment.id}">x</button>
 								</li>
 							</c:forEach>
 						</ul>
 					</div>
 					<div class="comment">
+						<p></p>
 						<form action="/board/${item.id}/comment" method="POST"
 							enctype="multipart/form-data">
-							<input type="hidden" name="id" value="${item.id}"> <input
-								type="text" id="content" name="content" placeholder="댓글을 입력하세요">
+							<input type="hidden" name="id" value="${item.id}"> 
+							<input type="text" id="content" name="content" placeholder="댓글을 입력하세요">
 							<input type="submit" value="댓글"><br>
 						</form>
 					</div>
