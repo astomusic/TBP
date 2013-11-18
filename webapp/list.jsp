@@ -148,17 +148,22 @@
 		<header>
 			<c:choose>
 				<c:when test="${empty sessionScope.userid}">
-					<a>로그인 해주세요</a>
-					<button type="button" name="login" onclick="location.href='/'">Log in</button>
-					<button type="button" name="signin" onclick="location.href='/login/form'">Sign in</button>
+					<h1>Welcome!</h1>
+					<div id="login">
+						<form action="/login/get" method="POST" enctype="multipart/form-data">
+								<input type="text" id="userid" name="userid" size="50" placeholder="USER ID"><br> 
+								<input type="password" id="password" name="password" size="50" placeholder="PASSWORD"><br>
+							<input type="submit" value="Login">
+							<button type="button" name="signin" onclick="location.href='/login/form'">Sign in</button>
+						</form>
+					</div>
 				</c:when>
 				<c:otherwise>
-					<a>${sessionScope.name}님 환영합니다.</a>
-					<button type="button" name="signout" onclick="location.href='/logout'">Logout</button>
-				</c:otherwise>
-			</c:choose>
+					<p>${sessionScope.name} 님 환영합니다.
+						<button type="button" name="signout" onclick="location.href='/logout'">Logout</button>
+					</p>
 		</header>
-		<h1>LIST</h1>
+		<h1>Talk by Picture</h1>
 		<div id="board_list">
 			<c:forEach items="${boardlist}" var="item">
 				<div class="list_content">
@@ -202,10 +207,14 @@
 				</div>
 			</c:forEach>
 		</div>
-		<div id="list_new">
+<!-- 		<div id="list_new">
 			<button type="button" name="new"
 				onclick="location.href='/board/form'">새글</button>
+		</div> -->
+		<div id="list_new" onclick="location.href='/board/form'">새글</button>
 		</div>
+				</c:otherwise>
+			</c:choose>
 	</div>
 </body>
 </html>

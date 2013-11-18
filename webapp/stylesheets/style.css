@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
 
 /*	
 	v2.0 | 20110126
@@ -22,8 +23,7 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-family : NanumGothicWeb,Raleway,Helvetica Neue,Helvetica,AppleGothic,sans-serif,Arial;
-	font: inherit;
+	font-family: 'Nanum Pen Script', cursive;
 	vertical-align: baseline;
 }
 
@@ -76,6 +76,7 @@ html{
 h1 {
 	text-align : center;
 	margin-top : 20px;
+	font-family: 'Nanum Pen Script', cursive;
 	font-size : 1.5em;
 	font-weight : 100; /*default value : 4000 */
 	background-color: rgba(255, 255, 255, 0.5);
@@ -88,17 +89,36 @@ img {
 	max-width : 360px;
 }
 
+input{
+	font-size : 1em;
+	font-family: 'Nanum Pen Script', cursive;
+	border : none;
+	padding-top : 2px;
+	background-color:rgba(255, 255, 255, 1);
+	vertical-align: top;
+}
+
 input[type=submit], button {
 	padding-top : 2px;
 	background-color:rgba(255, 255, 255, 0.8);
-	font-size : 0.8em;
-	font-family : 'NanumGothicWeb';
+	font-size : 1em;
+	font-family: 'Nanum Pen Script', cursive;
 	color : black;
 	border : none;
 	width : 50px;
-	height: 20px;
+	height: 25px;
 	border-radius : 1em;
 	vertical-align: top;
+}
+
+input::-webkit-input-placeholder { 
+    font-family: 'Nanum Pen Script', cursive;
+    font-size : 1em;
+}
+
+input:: -moz-placeholder { 
+    font-family: 'Nanum Pen Script', cursive;
+    font-size : 1em;
 }
 
 button[name=c_delete] {
@@ -108,8 +128,8 @@ button[name=c_delete] {
 	padding-bottom : 0px;
 	line-height : 19px;
 	background-color: rgba(0, 0, 0, 0.0);
-	font-size : 0.5em;
-	font-family : 'NanumGothicWeb';
+	font-size : 1.2em;
+	font-family: 'Nanum Pen Script', cursive;
 	color : #787878;
 	border : none;
 	width : 15px;
@@ -122,6 +142,8 @@ textarea {
 }
 
 #content_content {
+	font-size : 1em;
+	font-family: 'Nanum Pen Script', cursive;
 	padding : 10px 0px;
 	background-color: rgba(255, 255, 255, 0.5);
 	margin-top: 0px;
@@ -156,10 +178,13 @@ textarea {
 
 .comment {
 	padding : 10px 20px;
-	1line-height: 150px;
+	font-size : 1em;
+	font-family: 'Nanum Pen Script', cursive;
 }
 
 .comment_view {
+	font-size : 1em;
+	font-family: 'Nanum Pen Script', cursive;
 	padding : 10px 20px;
 	display: block;
 	-webkit-transition: all 1s ease-out;
@@ -194,4 +219,9 @@ textarea {
     color: #000000;
     border: 1px solid black;
     transition: box-shadow .3s;
+}
+header
+{
+	margin : 20px 0px;
+	text-align : center;
 }
