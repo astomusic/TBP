@@ -86,16 +86,44 @@ h1 {
 }
 
 img {
-	max-width : 360px;
+	max-width : 340px;
+	margin: 0 auto;
+	-webkit-box-shadow: 2px 3px 4px rgba(0,0,0,.5);
 }
 
-input{
+.image{
+	width : 360px;
+	height : auto;
+	-webkit-filter: blur(3px);
+	background-size: cover;
+    background-repeat: no-repeat;
+    z-index : 1;
+    position:absolute
+}
+
+.image_s {
+	width : 360px;
+	padding-top :10px;
+	padding-bottom :10px;
+	margin: 0 auto;
+	display: table-cell; 
+	text-align: center; 
+	vertical-align: middle;
+	width : 360px;
+	z-index : 2;
+	position:relative;
+	left:0px;
+	top:0px;
+}
+input, textarea{
 	font-size : 1em;
 	font-family: 'Nanum Pen Script', cursive;
 	border : none;
+	width : 80%;
 	padding-top : 2px;
 	background-color:rgba(255, 255, 255, 1);
 	vertical-align: top;
+	resize : none;
 }
 
 input[type=submit], button {
@@ -111,6 +139,9 @@ input[type=submit], button {
 	vertical-align: top;
 }
 
+button:hover, input[type=submit]:hover{
+	background : #eaff00;
+}
 input::-webkit-input-placeholder { 
     font-family: 'Nanum Pen Script', cursive;
     font-size : 1em;
@@ -137,8 +168,8 @@ button[name=c_delete] {
 	border-radius : 0em;
 }
 
-textarea {
-	resize : none;
+button[name=c_delete]:hover{
+	color : #f02424;
 }
 
 #content_content {
@@ -148,6 +179,7 @@ textarea {
 	background-color: rgba(255, 255, 255, 0.5);
 	margin-top: 0px;
 	margin-bottom: 10px;
+	padding : 10px;
 }
 #board_list {
 	padding : 10px 20px;
@@ -166,10 +198,6 @@ textarea {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: rgba(255, 255, 255, 0.5);
-}
-
-#content>img {
-
 }
 
 .list_content>h1, .list_content>#content_content, .list_content>.buttons, .list_content>.comment{
@@ -219,6 +247,19 @@ textarea {
     color: #000000;
     border: 1px solid black;
     transition: box-shadow .3s;
+}
+
+#list_new {
+	text-align : center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: rgba(255, 255, 255, 0.3);
+	-webkit-transition: all 1s ease-out;
+}
+
+#list_new:hover{
+	background-color: rgba(255, 255, 255, 0.8);
+	cursor:pointer;
 }
 header
 {

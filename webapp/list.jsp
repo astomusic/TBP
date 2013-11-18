@@ -34,7 +34,7 @@
 			commenttog[i].addEventListener('click',toggleComments, false);
 		}
 		
-		boardimg = document.querySelectorAll('.list_content>img');
+		boardimg = document.querySelectorAll('.list_content>.image_s>img');
 		for (var i=0 ; i < boardimg.length ; i++) {
 			boardimg[i].addEventListener('click',toggleimg, false);
 		}
@@ -111,7 +111,7 @@
 	}
 	
 	function toggleimg(e) {
-		board = e.target.parentElement;
+		board = e.target.parentElement.parentElement;
 		head = board.querySelectorAll('h1');
 		content_content = board.querySelectorAll('#content_content');
 		buttons = board.querySelectorAll('.buttons');
@@ -169,8 +169,8 @@
 				<div class="list_content">
 					<h1>${item.title}</h1>
 					<c:if test="${not empty item.attachment}">
-						<img src="/images/${item.attachment}">
-						<br>
+						<div class=image style="background-image:url('/images/${item.attachment}');"></div>
+						<div class=image_s><img src="/images/${item.attachment}"></div>
 					</c:if>
 					<div id="content_content">${item.contents}</div>
 					<div class=buttons>
@@ -211,8 +211,7 @@
 			<button type="button" name="new"
 				onclick="location.href='/board/form'">새글</button>
 		</div> -->
-		<div id="list_new" onclick="location.href='/board/form'">새글</button>
-		</div>
+		<div id="list_new" onclick="location.href='/board/form'">New Post</div>
 				</c:otherwise>
 			</c:choose>
 	</div>

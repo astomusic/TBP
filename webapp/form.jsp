@@ -14,10 +14,9 @@
 	</header>
 	<div id="request">
 	 	<form action="/board" method="POST" enctype="multipart/form-data">
-	 	<label for="title">Title :</label> 
 	 	<input type="text" id="title" name="title" size="45" placeholder="제목을 입력하세요"><br>
 	 	<textarea id="contents" name="contents" rows="10" cols="40" placeholder="내용을 입력하세요"></textarea><br>
-	 	<input type="file" name="img_file" size ="20" accept="image/*" value="파일">
+	 	<input type="file" name="img_file" size ="20" accept="image/*" value="파일"><br>
 	 	<input type="submit" value="제출">
 	 	<button type="button" name="cancel" onclick="location.href='/board/list'">취소</button>
 	 	</form>
