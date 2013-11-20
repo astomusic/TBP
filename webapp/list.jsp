@@ -6,11 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-<title>List</title>
+<link rel="icon" href="/stylesheets/tbp.ico" />
+<title>TBP board</title>
 <script type="text/javascript"> 
 	
 	function del() {
-		alert("댓글이 있는 글을 삭제할수 없습니다!");
+		commentList = document.querySelectorAll('.comment_view>ul');
+		console.log(commentList);
+		//alert("댓글이 있는 글을 삭제할수 없습니다!");
 	}
 	
 	function initPage() {
@@ -47,6 +50,21 @@
 		commentList = document.querySelectorAll('.comment_view>ul>li>button');
 		for ( var i=0 ; i < commentList.length ; i++) {
 			commentList[i].addEventListener('click',deleteComments, false);
+		}
+		
+		newpost = document.querySelector('#list_new');
+		if(newpost) {
+			newpost.addEventListener('click',togglenewpost, false);
+		}
+	}
+	
+	function togglenewpost(e) {
+		wrapnewpost = document.querySelector('.wrap_new_post');
+		var name =  wrapnewpost.className;
+		if (name === "wrap_new_post hidden") {
+			wrapnewpost.className = "wrap_new_post";
+		} else {
+			wrapnewpost.className = "wrap_new_post hidden";
 		}
 	}
 	function deleteComments(e) {
@@ -153,8 +171,10 @@
 						<form action="/login/get" method="POST" enctype="multipart/form-data">
 								<input type="text" id="userid" name="userid" size="50" placeholder="USER ID"><br> 
 								<input type="password" id="password" name="password" size="50" placeholder="PASSWORD"><br>
-							<input type="submit" value="Login">
-							<button type="button" name="signin" onclick="location.href='/login/form'">Sign in</button>
+							<div class=buttons>
+								<input type="submit" value="Login">
+								<button type="button" name="signin" onclick="location.href='/login/form'">Sign in</button>
+							</div>
 						</form>
 					</div>
 				</c:when>
@@ -197,8 +217,7 @@
 					</div>
 					<div class="comment">
 						<p></p>
-						<form action="/board/${item.id}/comment" method="POST"
-							enctype="multipart/form-data">
+						<form action="/board/${item.id}/comment" method="POST" enctype="multipart/form-data">
 							<input type="hidden" name="id" value="${item.id}"> 
 							<input type="text" id="content" name="content" placeholder="댓글을 입력하세요">
 							<input type="submit" value="댓글"><br>
@@ -211,7 +230,37 @@
 			<button type="button" name="new"
 				onclick="location.href='/board/form'">새글</button>
 		</div> -->
-		<div id="list_new" onclick="location.href='/board/form'">New Post</div>
+		<!-- <div id="list_new" onclick="location.href='/board/form'">New Post</div> -->
+		<div id="list_new">New Post</div>
+		
+		<div class="wrap_new_post hidden">
+			<header>
+				<h1>New Post</h1>
+			</header>
+			<div id="new_post">
+			 	<form action="/board" method="POST" enctype="multipart/form-data">
+			 	<input type="text" id="title" name="title" size="45" placeholder="제목을 입력하세요"><br>
+			 	<textarea id="contents" name="contents" rows="10" cols="40" placeholder="내용을 입력하세요"></textarea><br>
+			 	<input type="file" name="img_file" size ="20" accept="image/*" value="파일"><br>
+			 	<input type="submit" value="제출">
+			 	<button type="button" name="cancel" onclick="location.href='/board/list'">취소</button>
+			 	</form>
+			</div>
+		</div>
+		
+		<div class="wrap_modify_post hidden">
+				<h1>Modify</h1>
+			<div id="modify_post">
+			 	<form action="/board/${board.id}/modified" method="POST" enctype="multipart/form-data">
+			 	<input type="text" id="title" name="title" size="45" value="${board.title}"><br>
+			 	<textarea id="contents" name="contents" rows="10" cols="40">${board.contents}</textarea><br>
+			 	<input type="file" name="img_file" size ="20" accept="image/*"><br>
+			 	<input type="submit" value="제출">
+			 	<button type="button" name="cancel" onclick="location.href='/board/list'">취소</button>
+			 	</form>
+			</div>
+		</div>
+
 				</c:otherwise>
 			</c:choose>
 	</div>

@@ -5,14 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+<link rel="icon" href="/stylesheets/tbp.ico" />
 <title>TBP board</title>
 </head>
 <body>
 <div id="wrap">
-	<div id="name" >
 		<h1>글쓰기 수정</h1>
-	</div>
-	<div id="request">
+	<div id="modify_post">
 	 	<form action="/board/${board.id}/modified" method="POST" enctype="multipart/form-data">
 	 	<input type="text" id="title" name="title" size="45" value="${board.title}"><br>
 	 	<textarea id="contents" name="contents" rows="10" cols="40">${board.contents}</textarea><br>

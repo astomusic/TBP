@@ -40,7 +40,7 @@ public class BoardController {
 		board.setAttachment(img_file.getOriginalFilename());
 		boardRepository.save(board);
 		long id = board.getId();
-		return "redirect:/board/" + id;
+		return "redirect:/board/list";
 	}
 	
 	@RequestMapping("/list")
@@ -69,7 +69,7 @@ public class BoardController {
 		FileUploader.upload(img_file);
 		board.setAttachment(img_file.getOriginalFilename());
 		boardRepository.save(board);
-		return "redirect:/board/" + id;
+		return "redirect:/board/list";
 	}
 
 	@RequestMapping("/{id}/delete")
@@ -78,10 +78,10 @@ public class BoardController {
 		if(board.getComments().isEmpty() == true){
 			boardRepository.delete(id);
 		} else {
-			model.addAttribute("message", "댓글이 있는 글을 삭제할수 없습니다!"); 
-			return "redirect:/";
+			//model.addAttribute("message", "댓글이 있는 글을 삭제할수 없습니다!"); 
+			return "redirect:/board/list";
 		}
-		return "redirect:/";
+		return "redirect:/board/list";
 	}
 	
 	@RequestMapping("/{id}")

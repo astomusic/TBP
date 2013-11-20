@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+<link rel="icon" href="/stylesheets/tbp.ico" />
 <title>TBP board</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
 	<header>
 		<h1>New Post</h1>
 	</header>
-	<div id="request">
+	<div id="new_post">
 	 	<form action="/board" method="POST" enctype="multipart/form-data">
 	 	<input type="text" id="title" name="title" size="45" placeholder="제목을 입력하세요"><br>
 	 	<textarea id="contents" name="contents" rows="10" cols="40" placeholder="내용을 입력하세요"></textarea><br>

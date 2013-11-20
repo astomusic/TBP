@@ -67,7 +67,8 @@ a:hover,a:active,a:focus {
 /* start */
 
 html{
-    background: url('http://i.stack.imgur.com/jGlzr.png') repeat 0 0 scroll;
+    /* background: url('http://i.stack.imgur.com/jGlzr.png') repeat 0 0 scroll; */
+    background: url('Creme_browserbg.jpg') repeat 0 0 scroll;
     background-color:#0C0C0C;
     height:100%;
     width:100%;
@@ -75,7 +76,7 @@ html{
 
 h1 {
 	text-align : center;
-	margin-top : 20px;
+	margin-top : 35px;
 	font-family: 'Nanum Pen Script', cursive;
 	font-size : 1.5em;
 	font-weight : 100; /*default value : 4000 */
@@ -83,6 +84,11 @@ h1 {
 	letter-spacing : 0.1em;
 	padding-top: 10px;
 	padding-bottom : 10px;
+}
+
+h1, header {
+
+	
 }
 
 img {
@@ -142,6 +148,10 @@ input[type=submit], button {
 button:hover, input[type=submit]:hover{
 	background : #eaff00;
 }
+
+.buttons { 
+	text-align: center; 
+}
 input::-webkit-input-placeholder { 
     font-family: 'Nanum Pen Script', cursive;
     font-size : 1em;
@@ -185,10 +195,6 @@ button[name=c_delete]:hover{
 	padding : 10px 20px;
 }
 
-#list_new{
-	padding : 10px 20px;
-}
-
 #index_butten{
 	padding : 10px 20px;
 }
@@ -205,15 +211,16 @@ button[name=c_delete]:hover{
 }
 
 .comment {
-	padding : 10px 20px;
+	padding : 0px 20px 20px 20px;
 	font-size : 1em;
 	font-family: 'Nanum Pen Script', cursive;
+	margin-bottom : 20px;
 }
 
 .comment_view {
 	font-size : 1em;
 	font-family: 'Nanum Pen Script', cursive;
-	padding : 10px 20px;
+	padding : 0px 20px;
 	display: block;
 	-webkit-transition: all 1s ease-out;
     opacity: 0; 
@@ -221,12 +228,12 @@ button[name=c_delete]:hover{
     overflow: hidden;
 }
 
-#request {
+#new_post, #modify_post {
 	margin : 20px 0px;
 	text-align : center;
 }
 
-#login {
+#login, #request {
 	margin : 20px 20px;
 	text-align : left;
 }
@@ -235,9 +242,10 @@ button[name=c_delete]:hover{
 	width : 400px;
 	border : 1px solid rgba(255, 255, 255, 0.5);
 	margin: 0 auto;
+	z-index : 3;
 }
 
-#userid, #password {
+#userid, #password, #name {
     display: block;
     width : 320px;
     height: 25px;
@@ -249,18 +257,63 @@ button[name=c_delete]:hover{
     transition: box-shadow .3s;
 }
 
+#list_new{
+	padding : 10px 20px;
+	
+}
+
 #list_new {
 	text-align : center;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: rgba(255, 255, 255, 0.3);
+	padding : 10px 20px;
+/* 	border-style: dotted;
+	border-width: 1px;
+	border-color: rgba(255, 255, 255, 1.0); */
+	background-color: rgba(255, 255, 255, 0.5);
 	-webkit-transition: all 1s ease-out;
+	position : fixed;
+	bottom : 0px;
+	z-index : 10;
 }
 
 #list_new:hover{
-	background-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(234, 255, 0, 0.5);
 	cursor:pointer;
 }
+
+.wrap_new_post.hidden {
+	opacity : 0;
+	z-index : 0;
+	position : fixed;
+	bottom : -500px;
+	-webkit-transition: all 1s ease-out;
+}
+.wrap_new_post {
+	opacity : 1;
+	position : fixed;
+	background-color: rgba(200, 200, 200, 0.8);
+	width : 400px;
+	bottom : 0px;
+	z-index : 5;
+	-webkit-transition: all 1s ease-out;
+}
+
+.wrap_modify_post.hidden {
+	opacity : 0;
+	z-index : 0;
+	position : fixed;
+	bottom : -500px;
+	-webkit-transition: all 1s ease-out;
+}
+.wrap_modify_post {
+	opacity : 1;
+	position : fixed;
+	background-color: rgba(200, 200, 200, 0.8);
+	width : 400px;
+	bottom : 0px;
+	z-index : 5;
+	-webkit-transition: all 1s ease-out;
+}
+
 header
 {
 	margin : 20px 0px;

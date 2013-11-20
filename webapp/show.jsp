@@ -32,7 +32,7 @@
 			<button type="button" name="list" onclick="location.href='/board/list'">목록</button>
 		</div>
 		
-		<div id="comment_view">
+		<div class="comment_view">
 		<ul>
 			<c:forEach items="${board.comments}" var="comment">
 				<li>${comment.content} <button type="button" name="c_delete" onclick="location.href='/board/${comment.id}/comment_delete'">x</button></li>
@@ -41,9 +41,9 @@
 		</ul>
 		</div>
 		
-		<div id="comment">
+		<div class="comment">
 		<form action="/board/${board.id}/comment" method="POST" enctype="multipart/form-data">
-	 	<textarea id="content" name="content" rows="2" cols="48" placeholder="댓글을 입력하세요"></textarea><br>
+	 	<textarea id="content" name="content" rows="1" cols="48" placeholder="댓글을 입력하세요"></textarea><br>
 	 	<input type="submit" value="댓글"><br>
 	 	</form>
 		</div>

@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+<link rel="icon" href="/stylesheets/tbp.ico" />
 <title>TBP</title>
 </head>
 <body>
@@ -19,8 +20,10 @@
 			<form action="/login/get" method="POST" enctype="multipart/form-data">
 					<input type="text" id="userid" name="userid" size="50" placeholder="USER ID"><br> 
 					<input type="password" id="password" name="password" size="50" placeholder="PASSWORD"><br>
-				<input type="submit" value="Login">
-				<button type="button" name="signin" onclick="location.href='/login/form'">Sign in</button>
+				<div class=buttons>
+					<input type="submit" value="Login">
+					<button type="button" name="signin" onclick="location.href='/login/form'">Sign in</button>
+				</div>
 			</form>
 		</div>
 	</div>
