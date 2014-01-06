@@ -31,6 +31,7 @@ public class BoardController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String create(Board board, MultipartFile img_file) {
 		log.debug("New Post In Board : {}", board);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!");
 		//if(board.getId() )
 		//System.out.println("Board: " + board.getId());
 		//System.out.println("filename: " + img_file.getOriginalFilename());
@@ -39,7 +40,7 @@ public class BoardController {
 		// TODO 첨부한 이미지 정보를 데이터베이스에 추가한다.
 		board.setAttachment(img_file.getOriginalFilename());
 		boardRepository.save(board);
-		long id = board.getId();
+		//long id = board.getId();
 		return "redirect:/board/list";
 	}
 	

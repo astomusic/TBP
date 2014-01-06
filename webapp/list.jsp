@@ -12,8 +12,7 @@
 	
 	function del() {
 		commentList = document.querySelectorAll('.comment_view>ul');
-		console.log(commentList);
-		//alert("댓글이 있는 글을 삭제할수 없습니다!");
+		alert("댓글이 있는 글을 삭제할수 없습니다!");
 	}
 	
 	function initPage() {
@@ -40,6 +39,8 @@
 		boardimg = document.querySelectorAll('.list_content>.image_s>img');
 		for (var i=0 ; i < boardimg.length ; i++) {
 			boardimg[i].addEventListener('click',toggleimg, false);
+			//boardimg[i].addEventListener('mouseover',toggleimg, false);
+			//boardimg[i].addEventListener('mouseout',toggleimg, false);
 		}
 		
 		formList = document.querySelectorAll('.comment input[type=submit]');
@@ -159,6 +160,16 @@
 	}
 
 	window.onload = initPage;
+	
+/* 	function logincheck() {
+		var userid = document.getElementById('userid');
+		//button[name=c_delete]
+		if(!userid) {
+			alert("ID");
+		}
+		console.log(userid.value);
+	} */
+	
 </script>
 </head>
 <body>
@@ -168,7 +179,7 @@
 				<c:when test="${empty sessionScope.userid}">
 					<h1>Welcome!</h1>
 					<div id="login">
-						<form action="/login/get" method="POST" enctype="multipart/form-data">
+						<form action="/login/get" name="login" method="POST" enctype="multipart/form-data">
 								<input type="text" id="userid" name="userid" size="50" placeholder="USER ID"><br> 
 								<input type="password" id="password" name="password" size="50" placeholder="PASSWORD"><br>
 							<div class=buttons>
